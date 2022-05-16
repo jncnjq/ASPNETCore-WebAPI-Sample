@@ -20,10 +20,10 @@ env:
   DEPLOY_PACKAGE_NAME       : "aspnetapp_${{ github.sha }}.zip"
   AWS_REGION_NAME           : "us-east-1"
 
-on: 
-  push:
-    branches: 
-      - master
+on: [push]
+#  push:
+#    branches: 
+#      - master
 
 jobs:
   my_ci_part:
