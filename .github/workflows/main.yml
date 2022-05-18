@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checjout@v2
+        uses: actions/checjout@v3
       - name: Deploy to AWS
         uses: appleboy/ssh-action@master
         with:
