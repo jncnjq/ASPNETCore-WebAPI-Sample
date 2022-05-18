@@ -16,11 +16,11 @@ jobs:
         uses: actions/checjout@v2
       - name: Deploy to AWS
         uses: appleboy/ssh-action@master
-          with:
-            host: ${{ secrets.HOST }}
-            username: ${{ secrets.USERNAME }}
-            password: ${{ secrets.PASSWORD }}
-            port: ${{ secrets.PORT }}
-            script: |
-              whoami
-              ls -la
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          port: ${{ secrets.PORT }}
+          script: |
+            whoami
+            ls -la
