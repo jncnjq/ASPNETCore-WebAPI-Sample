@@ -1,0 +1,28 @@
+# This is a basic workflow to help you get started with Actions
+
+name: CI-CD-To-AWS-EC2
+
+# Controls when the workflow will run
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  deploy:
+    name: Deploy to EC2
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checjout@v2
+      - name: Deploy to AWS
+        uses: appleboy/ssh-action@master
+          with:
+            host: ${{ secrets.HOST }}
+            username: ${{ secrets.USERNAME }}
+            password: ${{ secrets.PASSWORD }}
+            port: ${{ secrets.PORT }}
+            script: |
+              whoami
+              ls -la
