@@ -23,7 +23,7 @@ jobs:
           port: ${{ secrets.PORT }}
           script: |
 	    docker container stop $(docker ps -aq)
-            docker rm --force $(docker container ls -q)
+	    docker rm --force $(docker container ls -q)
 	    docker rmi $(docker image la -q)
 	    cd ~
 	    git pull
