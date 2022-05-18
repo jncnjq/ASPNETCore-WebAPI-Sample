@@ -22,10 +22,5 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.PORT }}
           script: |
-	    docker container stop $(docker ps -aq)
-	    docker rm --force $(docker container ls -q)
-	    docker rmi $(docker image la -q)
-	    cd ~
-	    git pull
-	    docker compose up -d
-	    exit
+		whoami
+		ls -la
