@@ -22,5 +22,10 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.PORT }}
           script: |
-            whoami 
-            ls -la
+            docker container stop $(docker ps -aq)
+            docker rm --force $(docker container ls -q)
+            docker rmi $(docker image la -q)
+            cd ~/ASPNETCore-WebAPI-Sample
+            git pull
+            docker compose up -d
+            exit
