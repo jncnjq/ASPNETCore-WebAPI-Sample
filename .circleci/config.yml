@@ -13,7 +13,7 @@ jobs:
             ssh $SSH_USER@$SSH_HOST "cd ~  && git pull repository && docker stop $(docker ps -aq) && docker rm $(docker container ls -a) && docker rmi $(docker image ls -q) && docker compose up"
 workflows:
  version: 2
-  build-and-deploy:
+ build-and-deploy:
     jobs:
       - build
       - deploy:
