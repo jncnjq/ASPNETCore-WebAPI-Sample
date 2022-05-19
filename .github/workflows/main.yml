@@ -8,8 +8,8 @@ on:
     branches: [ main ]
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  deploy:
-    name: Deploy to EC2
+  deploy-remote-docker:
+    name: Deploy to remote docker
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -21,6 +21,27 @@ jobs:
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.PORT }}
+          script: |
+            docker container stop $(docker ps -aq)
+            docker rm $(docker container ls -aq)
+            docker rmi $(docker image ls)
+            cd ~/ASPNETCore-WebAPI-Sample
+            git pull
+            docker compose up -d
+            exit
+  deploy-aws:
+    name: Deploy to AWS
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Deploy to AWS
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.AWS_HOST }}
+          username: ${{ secrets.AWS_USERNAME }}
+          password: ${{ secrets.AWS_PASSWORD }}
+          port: ${{ secrets.AWS_PORT }}
           script: |
             docker container stop $(docker ps -aq)
             docker rm $(docker container ls -aq)
