@@ -21,7 +21,7 @@ jobs:
       - run:
           name: Creating Artifacts
           command: |
-              Compress-Archive SampleWebApiAspNetCore\bin\Release\net5.0\ artifact-net5.0-rel-bin.zip
+              powershell Compress-Archive SampleWebApiAspNetCore\bin\Release\net5.0\ artifact-net5.0-rel-bin.zip
 #             ls c:/windows/system32
 #             mkdir /tmp/artifacts;
 #             cp . /tmp/artifacts;
