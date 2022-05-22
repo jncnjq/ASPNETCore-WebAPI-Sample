@@ -34,7 +34,7 @@ jobs:
 #      - store_artifacts:
 #          path: /tmp/artifacts/art-2
 #          destanation: artifact-file1
-jobs:
+
   build-images:
     environment:
       F_IMAGE_NAME: jncnjq/aspnetingress
@@ -52,3 +52,10 @@ jobs:
               docker build -t $B_IMAGE_NAME .
               cd ../nginx
               docker build -t $F_IMAGE_NAME .
+
+workflows:
+  version: 2
+  build-master:
+    jobs:
+      - build-artifact:
+      - build-images:
