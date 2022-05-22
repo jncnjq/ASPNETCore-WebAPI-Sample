@@ -34,6 +34,7 @@ jobs:
 #      - store_artifacts:
 #          path: /tmp/artifacts/art-2
 #          destanation: artifact-file1
+jobs:
   build-images:
     environment:
       F_IMAGE_NAME: jncnjq/aspnetingress
