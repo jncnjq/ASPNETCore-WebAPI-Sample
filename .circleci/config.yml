@@ -18,17 +18,17 @@ jobs:
       - run:
           name: "Build Application according to some given configuration"
           command: dotnet.exe build --configuration Release
-      - run:
-          name: Creating Artifacts
-          command: |
-             ls;
+#      - run:
+#          name: Creating Artifacts
+#          command: |
+#             ls;
 #             mkdir /tmp/artifacts;
 #             cp . /tmp/artifacts;
 #            echo "my artifact file" > /tmp/art-1;
 #            mkdir /tmp/artifacts;
 #            echo "my artifact files in a dir" > /tmp/artifacts/art-2;
       - store_artifacts:
-          path: /tmp/artifacts
+          path: SampleWebApiAspNetCore\bin\Release\net5.0\SampleWebApiAspNetCore.dll
 #          destination: artifact-file0
 #      - store_artifacts:
 #          path: /tmp/artifacts/art-2
