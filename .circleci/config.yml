@@ -29,4 +29,4 @@ jobs:
           destination: artifact-file0
       - store_artifacts:
           path: /tmp/artifacts
-	  destanation: artifact-file1
+          destanation: artifact-file1
