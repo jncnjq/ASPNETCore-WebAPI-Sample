@@ -3,7 +3,7 @@ orbs:
 #  heroku: circleci/heroku@1.2.6
   windows: circleci/windows@2.4.1
 jobs:
-  build:
+  build-artifact:
     description: Build application with Release configuration
     executor:
       name: windows/default
@@ -22,7 +22,7 @@ jobs:
           name: Creating Artifacts
           command: |
               powershell Compress-Archive SampleWebApiAspNetCore\bin\Release\net5.0\ artifact-net5.0-rel-bin.zip
-#             ls c:/windows/system32
+              ls
 #             mkdir /tmp/artifacts;
 #             cp . /tmp/artifacts;
 #            echo "my artifact file" > /tmp/art-1;
@@ -34,3 +34,20 @@ jobs:
 #      - store_artifacts:
 #          path: /tmp/artifacts/art-2
 #          destanation: artifact-file1
+  build-images:
+    environment:
+      F_IMAGE_NAME: jncnjq/aspnetingress
+      B_IMAGE_NAME: jncnjq/aspnetapp
+    docker:
+      - image: circleci/buildpack-deps:stretch
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: Build Dockers images
+          command: |
+              ls
+              cd SampleWebApiAspNetCore
+              docker build -t $B_IMAGE_NAME .
+              cd ../nginx
+              docker build -t $F_IMAGE_NAME .
