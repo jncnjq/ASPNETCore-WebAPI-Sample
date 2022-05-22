@@ -58,4 +58,10 @@ workflows:
   build-master:
     jobs:
       - build-artifact:
+          filters:
+            branches:
+              only: main
       - build-images:
+          filters:
+            branches:
+              only: main
