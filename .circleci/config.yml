@@ -21,15 +21,16 @@ jobs:
       - run:
           name: Creating Artifacts
           command: |
-             ls c:/windows/system32
+              Compress-Archive SampleWebApiAspNetCore\bin\Release\net5.0\ artifact-net5.0-rel-bin.zip
+#             ls c:/windows/system32
 #             mkdir /tmp/artifacts;
 #             cp . /tmp/artifacts;
 #            echo "my artifact file" > /tmp/art-1;
 #            mkdir /tmp/artifacts;
 #            echo "my artifact files in a dir" > /tmp/artifacts/art-2;
       - store_artifacts:
-          path: SampleWebApiAspNetCore\bin\Release\net5.0\
-          destination: net5.0-compile-app
+          path: artifact-net5.0-rel-bin.zip
+#          destination: net5.0-compile-app
 #      - store_artifacts:
 #          path: /tmp/artifacts/art-2
 #          destanation: artifact-file1
