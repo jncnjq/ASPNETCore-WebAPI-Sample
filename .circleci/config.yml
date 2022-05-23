@@ -1,7 +1,7 @@
 version: 2.1
 executors:
   docker-publisher:
-    inveronment:
+    environment:
       F_IMAGE_NAME: jncnjq/aspnetingress
       B_IMAGE_NAME: jncnjq/aspnetapp
     docker:
