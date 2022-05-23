@@ -75,8 +75,8 @@ jobs:
           name: Publish Docker images
           command: |
             echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
-            docker push $F_IMAGE_NAME:latest
-            docker push $B_IMAGE_NAME:latest
+            docker push SampleWebApiAspNetCore/$F_IMAGE_NAME:latest
+            docker push nginx/$B_IMAGE_NAME:latest
 
 workflows:
   version: 2
