@@ -6,8 +6,6 @@ executors:
       B_IMAGE_NAME: jncnjq/aspnetapp
     docker:
       - image: circleci/buildpack-deps:stretch
-  artifact-publisher:
-
 
 orbs:
 #  heroku: circleci/heroku@1.2.6
