@@ -99,6 +99,7 @@ jobs:
             docker push $B_IMAGE_NAME:latest
 
   reload-docker:
+    executor: docker-publisher
     steps:
       - run:
           name: Reload docker servise on docker host
