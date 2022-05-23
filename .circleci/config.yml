@@ -62,6 +62,13 @@ jobs:
               cd ../nginx
               docker build -t $F_IMAGE_NAME:latest .
               docker image ls
+      - run:
+          name: Archive Docker image
+          command: docker save -o image.tar $F_IMAGE_NAME $B_IMAGE_NAME
+      - persist_to_workspace:
+          root: .
+          paths:
+            - ./image.tar
 
   upload-images:
     executor: docker-publisher
@@ -71,14 +78,19 @@ jobs:
 #    docker:
 #      - image: circleci/buildpack-deps:stretch
     steps:
+      - attach_workspace:
+          at: /tmp/workspace
       - setup_remote_docker
+      - run:
+          name: Load archived Docker images
+          command: docker load -i /tmp/workspace/image.tar
       - run:
           name: Publish Docker images
           command: |
             docker image ls
-#            echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
-#            docker push $F_IMAGE_NAME:latest
-#            docker push $B_IMAGE_NAME:latest
+            echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+            docker push $F_IMAGE_NAME:latest
+            docker push $B_IMAGE_NAME:latest
 
 workflows:
   version: 2
