@@ -49,9 +49,24 @@ jobs:
           command: |
               ls
               cd SampleWebApiAspNetCore
-              docker build -t $B_IMAGE_NAME .
+              docker build -t $B_IMAGE_NAME:latest .
               cd ../nginx
-              docker build -t $F_IMAGE_NAME .
+              docker build -t $F_IMAGE_NAME:latest .
+
+  upload-images:
+    environment:
+      F_IMAGE_NAME: aspnetingress
+      B_IMAGE_NAME: aspnetapp
+    docker:
+      - image: circleci/buildpack-deps:stretch
+    steps:
+      - setup_remote_docker
+      - run:
+          name: Publish Docker images
+          command: |
+            echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+            docker push $F_IMAGE_NAME:latest
+            docker push $B_IMAGE_NAME:latest
 
 workflows:
   version: 2
@@ -62,6 +77,10 @@ workflows:
             branches:
               only: main
       - build-images:
+          filters:
+            branches:
+              only: main
+      - upload-images:
           filters:
             branches:
               only: main
