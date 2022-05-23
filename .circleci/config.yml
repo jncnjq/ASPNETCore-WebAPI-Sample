@@ -1,4 +1,12 @@
 version: 2.1
+executors:
+  docker-publisher:
+    inveronment:
+      F_IMAGE_NAME: jncnjq/aspnetingress
+      B_IMAGE_NAME: jncnjq/aspnetapp
+    docker:
+      - image: circleci/buildpack-deps:stretch
+
 orbs:
 #  heroku: circleci/heroku@1.2.6
   windows: circleci/windows@2.4.1
@@ -36,11 +44,12 @@ jobs:
 #          destanation: artifact-file1
 
   build-images:
-    environment:
-      F_IMAGE_NAME: jncnjq/aspnetingress
-      B_IMAGE_NAME: jncnjq/aspnetapp
-    docker:
-      - image: circleci/buildpack-deps:stretch
+    executor: docker-publisher
+#    environment:
+#      F_IMAGE_NAME: jncnjq/aspnetingress
+#      B_IMAGE_NAME: jncnjq/aspnetapp
+#    docker:
+#      - image: circleci/buildpack-deps:stretch
     steps:
       - checkout
       - setup_remote_docker
@@ -54,11 +63,12 @@ jobs:
               docker build -t $F_IMAGE_NAME:latest .
 
   upload-images:
-    environment:
-      F_IMAGE_NAME: aspnetingress
-      B_IMAGE_NAME: aspnetapp
-    docker:
-      - image: circleci/buildpack-deps:stretch
+    executor: docker-publisher
+#    environment:
+#      F_IMAGE_NAME: aspnetingress
+#      B_IMAGE_NAME: aspnetapp
+#    docker:
+#      - image: circleci/buildpack-deps:stretch
     steps:
       - setup_remote_docker
       - run:
@@ -69,7 +79,7 @@ jobs:
             docker push $B_IMAGE_NAME:latest
 
 workflows:
-  version: 2
+  version: 2.1
   build-master:
     jobs:
       - build-artifact:
