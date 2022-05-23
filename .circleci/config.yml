@@ -76,9 +76,9 @@ jobs:
           name: Publish Docker images
           command: |
             docker image ls
-            echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
-            docker push $F_IMAGE_NAME:latest
-            docker push $B_IMAGE_NAME:latest
+#            echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+#            docker push $F_IMAGE_NAME:latest
+#            docker push $B_IMAGE_NAME:latest
 
 workflows:
   version: 2
