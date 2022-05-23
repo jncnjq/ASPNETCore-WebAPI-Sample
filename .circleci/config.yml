@@ -92,7 +92,7 @@ workflows:
               only: main
       - upload-images:
           requires:
-            - build
+            - build-images
           filters:
             branches:
               only: main
