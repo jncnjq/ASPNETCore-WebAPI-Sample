@@ -61,6 +61,7 @@ jobs:
               docker build -t $B_IMAGE_NAME:latest .
               cd ../nginx
               docker build -t $F_IMAGE_NAME:latest .
+              docker image ls
 
   upload-images:
     executor: docker-publisher
@@ -74,9 +75,10 @@ jobs:
       - run:
           name: Publish Docker images
           command: |
+            docker image ls
             echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
-            docker push SampleWebApiAspNetCore/$F_IMAGE_NAME:latest
-            docker push nginx/$B_IMAGE_NAME:latest
+            docker push $F_IMAGE_NAME:latest
+            docker push $B_IMAGE_NAME:latest
 
 workflows:
   version: 2
