@@ -81,6 +81,8 @@ workflows:
             branches:
               only: main
       - upload-images:
+          requires:
+            - build
           filters:
             branches:
               only: main
