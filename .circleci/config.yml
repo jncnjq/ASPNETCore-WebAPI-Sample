@@ -98,6 +98,14 @@ jobs:
             docker push $F_IMAGE_NAME:latest
             docker push $B_IMAGE_NAME:latest
 
+  reload-docker:
+    steps:
+      - run:
+          name: Reload docker servise on docker host
+          command: |
+            ssh admin@ec2-34-224-66-44.compute-1.amazonaws.com "ls"
+
+
 workflows:
   version: 2
   build-master:
@@ -113,6 +121,12 @@ workflows:
       - upload-images:
           requires:
             - build-images
+          filters:
+            branches:
+              only: main
+      - reload-docker:
+          requires:
+            - upload-images
           filters:
             branches:
               only: main
