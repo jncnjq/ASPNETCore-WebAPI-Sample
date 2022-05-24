@@ -105,7 +105,7 @@ jobs:
       - run:
           name: Reload docker servise on docker host
           command: |
-            ssh -o StrictHostKeyChecking=no admin@ec2-34-224-66-44.compute-1.amazonaws.com "cd ~"
+            ssh -o StrictHostKeyChecking=no $AWS_SSH_USERNAME@$AWS_SSH_HOST "cd ~"
 
 workflows:
   version: 2
