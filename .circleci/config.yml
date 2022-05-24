@@ -3,8 +3,8 @@ version: 2.1
 executors:
   docker-publisher:
     environment:
-      F_IMAGE_NAME: $F_IMAGE_TAG
-      B_IMAGE_NAME: $B_IMAGE_TAG
+      F_IMAGE_NAME: jncnjq/aspnetingress
+      B_IMAGE_NAME: jncnjq/aspnetapp
     docker:
       - image: circleci/buildpack-deps:stretch
 
