@@ -99,7 +99,7 @@ jobs:
             docker push $B_IMAGE_NAME:latest
 # define reload app docker side 
   reload-docker:
-    machine: true
+    machine:
       enabled: true
     steps:
       - run:
