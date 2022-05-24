@@ -98,14 +98,14 @@ jobs:
             docker push $F_IMAGE_NAME:latest
             docker push $B_IMAGE_NAME:latest
 # define reload app docker side 
-  reload-docker:
-    machine:
-      enabled: true
-    steps:
-      - run:
-          name: Reload docker servise on docker host
-          command: |
-            ssh -o StrictHostKeyChecking=no $AWS_SSH_USERNAME@$AWS_SSH_HOST "cd ~"
+#  reload-docker:
+#    machine:
+#      enabled: true
+#    steps:
+#      - run:
+#          name: Reload docker servise on docker host
+#          command: |
+#            ssh -o StrictHostKeyChecking=no $AWS_SSH_USERNAME@$AWS_SSH_HOST "cd ~"
 
 workflows:
   version: 2
@@ -125,9 +125,9 @@ workflows:
           filters:
             branches:
               only: main
-      - reload-docker:
-          requires:
-            - upload-images
-          filters:
-            branches:
-              only: main
+#      - reload-docker:
+#          requires:
+#            - upload-images
+#          filters:
+#            branches:
+#              only: main
