@@ -97,6 +97,9 @@ jobs:
             echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
             docker push $F_IMAGE_NAME:latest
             docker push $B_IMAGE_NAME:latest
+
+
+
 # define reload app docker side 
 #  reload-docker:
 #    machine:
